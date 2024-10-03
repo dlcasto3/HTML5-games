@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    <link rel="icon" href="/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/text/css/wicons.css">
+    <link rel="stylesheet" href="/assets/text/css/global.css">
+    <!-- External Script -->
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <script src="/assets/text/js/setnavandfooter.js"></script>
+    
+    <style>
+        /* Basic body styling */
+        body {
+            background: var(--background);
+            margin: 0;
+            font-family: "Manrope", sans-serif;
+            color: var(--text);
+        }
+
+        /* Container setup */
+        .wrap {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        /* Scrollable area */
+        .scroll {
+            width: 75%;
+            height: calc(100% - 130px);
+            overflow-y: auto;
+            border-left: 1px solid #ffffff66;
+            border-right: 1px solid #ffffff66;
+        }
+
+        /* Individual game card setup */
+        .game {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed var(--text-dull);
+            padding: 10px;
+        }
+
+        /* Game image styling */
+        .game img {
+            height: 80px;
+            width: 80px;
+            border-radius: 8px;
+            margin-right: 10px;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        /* Game name and status */
+        .game p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 400;
+            text-align: left;
+        }
+
+        /* Launch button styling */
+        .game button {
+            margin-left: auto;
+            padding: 10px;
+            background: var(--background-light);
+            color: var(--text);
+            border: none;
+            cursor: pointer;
+            transition: text-shadow 0.2s ease-in-out;
+        }
+
+        /* Hover effect for button */
+        .game button:hover {
+            text-shadow: 0 0 15px currentColor;
+        }
+
+        /* Disabled button style */
+        .game button.disabled {
+            background: var(--dark);
+            color: var(--text-dull);
+            cursor: not-allowed;
+        }
+
+        /* Search bar */
+        #searchbar {
+            height: 30px;
+            width: 60%;
+            padding: 8px;
+            border: 2px solid var(--background-light);
+            border-radius: 8px;
+            color: var(--text);
+            background: none;
+        }
+
+        #searchbar:focus {
+            outline: none;
+            box-shadow: 0 0 8px var(--text-dull);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Button to toggle navigation -->
+    <button id="smallnavbtn" onclick="toggleSideNav()">
+        <i class="wicon wicon-bar-menu" id="snbtnsub"></i>
+    </button>
+
+    <!-- Search Bar -->
+    <div class="wrap">
+        <input placeholder="Search..." id="searchbar" type="text">
+        <div class="scroll">
+            <!-- Game Cards -->
+            <div class="game" data-name="idlebreakout/">
+                <img src="/assets/image/game/idlebreakout.png" alt="idlebreakout">
+                <p>idlebreakout</p>
+                <button onclick="launchGame('idlebreakout', 'idlebreakout')">Launch</button>
+                </div>
+            <div class="game" data-name="FNAF2">
+                <img src="/assets/image/game/fnaf2.png" alt="FNAF2">
+                <p>FNAF2</p>
+                <button onclick="launchGame('fnaf2', 'fnaf2')">Launch</button>
+                </div>
+            <div class="game" data-name="1v1.lol">
+                <img src="/assets/image/game/1v1lol.png" alt="1v1.lol">
+                <p>1v1.lol</p>
+                <button onclick="launchGame('1v1.lol', '1v1lol')">Launch</button>
+                </div>
+            <div class="game" data-name="Snow Rider 3D">
+                <img src="/assets/image/game/snowrider3d.png">
+                <p>Snow Rider 3D</p>
+                <button onclick="launchGame('Snow Rider 3D', 'snowrider3d')">Launch</button>
+                    <!-- More games... -->
+        </div>
+    </div>
+
+    <footer id="footer">
+        <!-- Footer content -->
+    </footer>
+
+    <script>
+        // Search functionality for filtering games
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchbar = document.getElementById('searchbar');
+            const games = document.querySelectorAll('.game');
+            
+            searchbar.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                games.forEach(game => {
+                    const gameName = game.getAttribute('data-name').toLowerCase();
+                    game.style.display = gameName.includes(query) ? '' : 'none';
+                });
+            });
+        });
+
+        // Function to launch a game in a new tab
+        function launchGame(name, id) {
+            const newTab = window.open('about:blank', '_blank');
+            if (!newTab) {
+                console.error("Failed to open new tab. Please check pop-up settings.");
+                return;
+            }
+                const htmlContent = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Loading ${name}</title>
+                        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+                        <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"><\/script>
+                        <style>
+                            body {background: #101010;}
+                            #wr {color: #00ff00; font-family: "Pixelify Sans", sans-serif; text-shadow: 0 0 8px currentColor;}
+                        </style>
+                    </head>
+                    <body>
+                        <span id="wr"></span>
+                        <script>
+                            // Initialize a variable
+                            var sv = 0;
+
+                            // Function to update the variable and notify the parent
+                            function updateVariable() {
+                                sv = 1;
+                                window.opener.postMessage('variableChanged', '*');
+                            }
+
+                            // Simulate variable change after some time
+                            setTimeout(updateVariable, 4000);
+                            var typewriter = new Typewriter('#wr', {
+                                cursor: "_",
+                                delay: "50",
+                            });
+                            typewriter
+                                .typeString('-wc launch ${id}')
+                                .pauseFor(200)
+                                .pasteString('<br>')
+                                .pauseFor(500)
+                                .pasteString('<br><b style="color: #cdcdcd;">Loading ${name}...</b>')
+                                .pauseFor(1300)
+                                .pasteString('<br><b style="color: #a0a0a0;">Loaded! Launching now.</b>')
+                                .start();
+                                
+                        <\/script>
+                    </body>
+                    </html>
+                `;
+
+                // Write the HTML content to the new tab
+                newTab.document.open();
+                newTab.document.write(htmlContent);
+                newTab.document.close();
+
+                // Handle messages from the new tab
+                window.addEventListener('message', function(event) {
+                    if (event.data === 'variableChanged') {
+                        newTab.location.href = `/${id}`;
+                    }
+                }, false);
+            }
+        </script>
+        <script src="/games/global.js"></script>
+    </body>
+</html>
