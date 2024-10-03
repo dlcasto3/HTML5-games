@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devon Casto's Main Website</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        :root {
+            --background: #061a20;
+            --background-light: #0a2730;
+            --text: #ffffff;
+            --btn-hover: #ffffff0f;
+        }
+        
+        body {
+            background: var(--background);
+            margin: 0;
+            font-family: "Manrope", Arial, sans-serif;
+            color: var(--text);
+            padding-top: 80px;
+        }
+        
+        nav.m {
+            width: 80%;
+            height: 60px;
+            background: #ffffff05;
+            border-radius: 30px;
+            position: fixed;
+            top: 15px;
+            left: 10%;
+            display: flex;
+            transition: 0.15s ease;
+            z-index: 100;
+        }
+        
+        nav.m .right {
+            height: 100%;
+            width: calc(100% - 60px);
+            background: transparent;
+            display: flex;
+            justify-content: right;
+        }
+        
+        #smallnavbtn {
+            height: 40px;
+            width: 40px;
+            margin: 10px;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 22px;
+            transition: 0.15s ease;
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 101;
+            display: none;
+        }
+        
+        #smallnavbtn:hover {
+            text-shadow: 0 0 10px var(--text);
+            cursor: pointer;
+        }
+        
+        .navbtn {
+            color: var(--text);
+            background: transparent;
+            border: none;
+            height: 40px;
+            margin: 10px;
+            font-weight: bold;
+            padding: 0 12px;
+            border-radius: 20px;
+            transition: background-color 0.15s ease;
+            position: relative;
+            font-family: "Manrope";
+        }
+        
+        .navbtn:hover {
+            cursor: pointer;
+        }
+        
+        .navbtn i {
+            padding-block-end: 0;
+        }
+        
+        .navbtn:after {
+            content: "";
+            position: absolute;
+            width: calc(100% - 40px);
+            transform: scaleX(0);
+            height: 1px;
+            bottom: 0px;
+            left: 20px;
+            background-color: var(--text);
+            transform-origin: bottom center;
+            transition: transform 0.25s ease-out;
+        }
+        
+        .navbtn:hover::after {
+            transform: scaleX(1);
+            box-shadow: 0 0 5px 1px var(--text);
+        }
+        
+        #sidenav {
+            width: 200px;
+            height: 100%;
+            position: fixed;
+            left: -200px;
+            top: 0;
+            background: var(--background);
+            transition: left 0.2s ease;
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            overflow: scroll;
+        }
+        
+        #sidenav button {
+            height: 40px;
+            width: 100%;
+            color: var(--text);
+            background: transparent;
+            border: none;
+            font-size: 25px;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        
+        #sidenav button:hover {
+            background: var(--background-light);
+            cursor: pointer;
+        }
+        
+        #sidenav button span {
+            margin-left: 10px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Responsive styles */
+        @media screen and (max-width: 6in) {
+            .navtext {display: none;}
+            .navbtn {width: 40px; font-size: 22px;}
+            nav.m button {display: flex; justify-content: center; align-items: center;}
+            nav.m button:hover {text-shadow: 0 0 10px var(--text); cursor: pointer;}
+        }
+        
+        @media screen and (max-width: 5in) {
+            nav.m {display: none;}
+            #smallnavbtn {display: block;}
+            #sidenav {display: flex;}
+            .navbtn {display: none;}
+        }
+    </style>
+
+    <script>
+        function toggleSideNav() {
+            const sidenav = document.getElementById('sidenav');
+            sidenav.style.left = sidenav.style.left === '0px' ? '-200px' : '0px';
+        }
+
+        function changeTitle() {
+            const newTitle = document.getElementById('titleInput').value;
+            document.title = newTitle || "Devon Casto's Main Website"; // Default title if input is empty
+        }
+    </script>
+</head>
+
+<body>
+    <button id="smallnavbtn" onclick="toggleSideNav()"><i class="fa fa-bars" id="snbtnsub"></i></button>
+
+    <!-- Main Navbar -->
+    <nav class="m">
+        <button class="navbtn" onclick="window.location.href='/';"><i class="fa fa-home"></i><br><span class="navtext">Home</span></button>
+        <div class="right">
+            <button class="navbtn" onclick="window.location.href='/axis';"><i class="fa fa-cube"></i><br><span class="navtext">Axis</span></button>
+            <button class="navbtn" onclick="window.location.href='/games';"><i class="fa fa-gamepad"></i><br><span class="navtext">Games</span></button>
+            <button class="navbtn" onclick="window.location.href='/tools';"><i class="fa fa-wrench"></i><br><span class="navtext">Tools</span></button>
+            <button class="navbtn" onclick="window.location.href='/settings';"><i class="fa fa-gear"></i><br><span class="navtext">Settings</span></button>
+        </div>
+    </nav>
+
+    <!-- Side Navigation -->
+    <nav id="sidenav">
+        <div style="height: 55px; width: 100%;"></div> <!-- spacer -->
+        <button onclick="window.location.href='/';"><i class="fa fa-home"></i><span>Home</span></button>
+        <button onclick="window.location.href='/axis';"><i class="fa fa-cube"></i><span>Axis</span></button>
+        <button onclick="window.location.href='/games';"><i class="fa fa-gamepad"></i><span>Games</span></button>
+        <button onclick="window.location.href='/tools';"><i class="fa fa-wrench"></i><span>Tools</span></button>
+        <button onclick="window.location.href='/settings';"><i class="fa fa-gear"></i><span>Settings</span></button>
+    </nav>
+
+    <!-- Main Content -->
+    <header>
+        <h1>Welcome to Devon Casto's Website</h1>
+    </header>
+
+    <!-- Title Input Section -->
+    <section id="titleInputSection" style="text-align: center; margin: 20px;">
+        <input type="text" id="titleInput" placeholder="Enter new title">
+        <button onclick="changeTitle()">Set Title</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hi! I'm Devon Casto, a web developer passionate about creating "school-friendly" websites.</p>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>My Projects</h2>
+        <ul>
+            <li>Project 1: The Main Website</li>
+        </ul>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Email: dlcasto3@boe.jack.k12.wv.us</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023-2024 Devon Casto. All rights reserved.</p>
+    </footer>
+</body>
+</html>
