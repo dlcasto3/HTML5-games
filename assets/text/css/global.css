@@ -1,0 +1,240 @@
+:root {
+    --background: #061a20;
+    --background-light: #0a2730;
+    --background-lighter: #1d5b6e;
+    --dark: #021318;
+    --text: #c9e8ed;
+    --text-dull: #94a4a6;
+    --btn-hover: #ffffff0f;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    font-family: 'Manrope', sans-serif;
+    background: var(--background);
+    cursor: url('/cursor.svg'), default;
+}
+
+/* Navigation Styles */
+nav.m {
+    width: calc(80% - 5px);
+    height: 60px;
+    padding-left: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 10px 2px var(--background-light);
+    border-radius: 30px;
+    position: fixed;
+    top: 15px;
+    left: 10%;
+    display: flex;
+    transition: 0.15s ease;
+    z-index: 100;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+
+nav.m .right {
+    height: 100%;
+    width: calc(100% - 55px);
+    padding-right: 5px;
+    background: transparent;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Small Navigation Button */
+#smallnavbtn {
+    height: 40px;
+    width: 40px;
+    margin: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 22px;
+    transition: filter 0.2s ease, left 0.2s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    display: none;
+}
+
+#smallnavbtn:hover {
+    filter: drop-shadow(0 0 4px var(--text));
+    cursor: url('/pointer.svg'), pointer;
+}
+
+/* Navigation Buttons */
+.navbtn {
+    color: var(--text);
+    background: transparent;
+    border: none;
+    height: 40px;
+    margin: 10px 5px;
+    font-weight: bold;
+    padding: 0 12px;
+    border-radius: 20px;
+    transition: background-color 0.15s ease, filter 0.2s ease;
+    font-family: 'Manrope', sans-serif;
+    filter: drop-shadow(0 0 4px var(--background));
+}
+
+.navbtn:hover {
+    cursor: url('/pointer.svg'), pointer;
+}
+
+.navbtn::after {
+    content: "";
+    position: absolute;
+    width: calc(100% - 40px);
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 20px;
+    background-color: var(--text);
+    transform-origin: bottom center;
+    transition: transform 0.25s ease-out;
+}
+
+.navbtn:hover::after {
+    transform: scaleX(1);
+    box-shadow: 0 0 5px 1px var(--text);
+}
+
+/* Side Navigation */
+#sidenav {
+    width: 200px;
+    height: 100%;
+    position: fixed;
+    left: -200px;
+    top: 0;
+    background: var(--background);
+    transition: left 0.2s ease;
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#sidenav button {
+    height: 40px;
+    width: 100%;
+    color: var(--text);
+    background: transparent;
+    border: none;
+    font-size: 25px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+    transition: box-shadow 0.2s ease;
+}
+
+#sidenav button:hover {
+    box-shadow: 0 0 10px 2px var(--background-lighter);
+    cursor: url('/pointer.svg'), pointer;
+}
+
+/* Footer Styles */
+footer {
+    width: 100%;
+    background: var(--dark);
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 6px var(--text-dull);
+}
+
+footer .top {
+    background: var(--background);
+    width: calc(100% - 30px);
+    padding: 0 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+footer .bottom {
+    width: calc(100% - 30px);
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+footer .section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: var(--background-light);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+footer a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color: var(--text-dull);
+}
+
+footer a:hover {
+    cursor: url('/pointer.svg'), pointer;
+}
+
+@media screen and (max-width: 8in) {
+    .navtext {
+        display: none;
+    }
+
+    .navbtn {
+        width: 40px;
+        font-size: 22px;
+    }
+
+    .navbtn::after {
+        display: none;
+    }
+
+    nav.m button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    footer .leftwrapper, 
+    footer .rightwrapper {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 5in) {
+    nav.m {
+        display: none;
+    }
+
+    #smallnavbtn {
+        display: block;
+    }
+
+    #sidenav {
+        display: flex;
+    }
+
+    .navbtn {
+        display: none;
+    }
+
+    footer .bottom {
+        flex-direction: column;
+    }
+
+    footer .leftwrapper {
+        flex-wrap: wrap;
+    }
+}
